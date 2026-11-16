@@ -1,0 +1,146 @@
+{
+  "generated_by": "bench/bench.mjs",
+  "corpus": {
+    "primary": {
+      "file": "data/scene.json",
+      "triangles": 700,
+      "width": 96,
+      "height": 96,
+      "fragments": 21129,
+      "degenerate": 0,
+      "depthRange": [
+        -0.9182314295733723,
+        0.9435799429320316
+      ],
+      "exactImageHash": "c7ea87fb"
+    },
+    "layered": {
+      "file": "data/scene-layered.json",
+      "triangles": 48,
+      "fragments": 170525,
+      "depthRange": [
+        -0.9000000000000001,
+        0.9000000000000001
+      ]
+    }
+  },
+  "timing_ms": {
+    "reps_rules": 7,
+    "reps_oracle": 5,
+    "coldStart_total": 30.087141,
+    "coldStart_oracle": 147.344035,
+    "rasterize": {
+      "n": 7,
+      "min": 1.0747820000000001,
+      "p25": 1.0960063999999998,
+      "median": 1.14705685,
+      "p75": 1.4782946000000001,
+      "p95": 2.1416837,
+      "max": 2.1416837,
+      "stddev": 0.35742883668598496,
+      "relSD": 0.269387057987997
+    },
+    "exact": {
+      "n": 7,
+      "min": 1.7548138999999998,
+      "p25": 1.8899253999999999,
+      "median": 1.9307421999999999,
+      "p75": 2.21673225,
+      "p95": 2.4397695500000003,
+      "max": 2.4397695500000003,
+      "stddev": 0.21456354379334303,
+      "relSD": 0.10560068925567408
+    },
+    "painter": {
+      "n": 7,
+      "min": 1.5073552,
+      "p25": 1.665736,
+      "median": 1.6847707,
+      "p75": 1.85112345,
+      "p95": 1.9832288500000002,
+      "max": 1.9832288500000002,
+      "stddev": 0.14367627349658513,
+      "relSD": 0.08260609697826672
+    },
+    "wboit": {
+      "n": 7,
+      "min": 0.25458759999999997,
+      "p25": 0.26238525,
+      "median": 0.28741680000000003,
+      "p75": 0.3127464,
+      "p95": 0.5876471999999999,
+      "max": 0.5876471999999999,
+      "stddev": 0.10834421803783105,
+      "relSD": 0.33221071683453485
+    },
+    "full_sweep": {
+      "n": 7,
+      "min": 5.3472686000000005,
+      "p25": 5.5479898,
+      "median": 6.210815800000001,
+      "p75": 7.3055178,
+      "p95": 7.9929062,
+      "max": 7.9929062,
+      "stddev": 0.9288655805389676,
+      "relSD": 0.14427633899680734
+    },
+    "oracle_raycast": {
+      "n": 5,
+      "min": 102.197323,
+      "p25": 102.483601,
+      "median": 103.245012,
+      "p75": 104.222731,
+      "p95": 131.862621,
+      "max": 131.862621,
+      "stddev": 11.55150193678629,
+      "relSD": 0.10616968978028164
+    }
+  },
+  "certificate": {
+    "oracle_vs_exact": {
+      "maxDiff": 0,
+      "rmse": 0,
+      "oracleFragments": 21129,
+      "rasterFragments": 21129
+    },
+    "painter_vs_exact": {
+      "maxDiff": 0.24919504370297568,
+      "rmse": 0.01239599701207572,
+      "visibleFraction": 0.022243923611111112,
+      "visiblePixels": 205,
+      "worstPixel": {
+        "x": 38,
+        "y": 40,
+        "diff": 0.24919504370297568
+      }
+    },
+    "wboit_vs_exact": {
+      "maxDiff": 0.39783261284757604,
+      "rmse": 0.04229262900919388,
+      "visibleFraction": 0.19032118055555555,
+      "visiblePixels": 1754,
+      "worstPixel": {
+        "x": 50,
+        "y": 58,
+        "diff": 0.39783261284757604
+      }
+    },
+    "order_violations": {
+      "pixels": 1074,
+      "pairs": 1788,
+      "witness": {
+        "x": 43,
+        "y": 23,
+        "swappedPairs": 1,
+        "fragments": 3
+      }
+    },
+    "layered": {
+      "painter_vs_exact_maxDiff": 0,
+      "orderViolations": 0,
+      "wboit_vs_exact_maxDiff": 0.18158242164763727,
+      "wboit_vs_exact_rmse": 0.02996517168168478
+    }
+  },
+  "note": "oracle_raycast is an independent world-space ray caster (baseline/oracle.mjs); it agrees with the screen-space rasterizer reference bit for bit on the primary corpus."
+}

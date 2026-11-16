@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>oitcert — order-independent transparency error certificate</title>
+<style>
+  body{margin:0;background:#0b0d12;color:#dfe6f2;font:13px/1.5 ui-monospace,Menlo,monospace}
+  #hud{position:fixed;left:12px;top:12px;padding:10px 12px;background:#12161fdd;border:1px solid #2a3346;border-radius:8px;max-width:420px}
+  h1{font-size:14px;margin:0 0 6px}
+  table{border-collapse:collapse;font-size:12px}
+  td{padding:1px 8px 1px 0;white-space:nowrap}
+  .v{color:#7ee2a8}
+  .w{color:#ffb454}
+  #ctl{position:fixed;left:12px;bottom:12px;padding:8px 12px;background:#12161fdd;border:1px solid #2a3346;border-radius:8px}
+  a{color:#7cc4ff}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.169.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="hud">
+  <h1>oitcert — what the certificate measured</h1>
+  <div>Same <code>src/core.mjs</code> as the node gates; numbers below are read from <code>bench/result.json</code>.</div>
+  <table id="tbl"></table>
+  <div style="margin-top:6px">Global-sort painter is <span class="v">exact</span> on parallel layers and
+  <span class="w">wrong</span> on interpenetrating soup — that is the whole point.</div>
+</div>
+<div id="ctl">opacity <input id="op" type="range" min="5" max="100" value="45"> <span id="opv">0.45</span></div>
+<script type="module" src="./main.js"></script>
+</body>
+</html>
