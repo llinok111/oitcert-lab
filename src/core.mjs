@@ -9,7 +9,7 @@
  *   - a screen-space software rasterizer (center-sampled, orthographic) that
  *     turns a triangle soup into per-pixel fragment lists;
  *   - three compositing rules over the SAME fragment lists:
- *       exact    : per-pixel far-to-near "over" (the reference, order exact)
+ *       exact    : per-pixel near-to-far "over" (the reference, order exact)
  *       painter  : one global far-to-near triangle sort (classic wrong answer)
  *       wboit    : weighted-blended OIT (McGuire & Bavoil 2013), depth
  *                  normalized to the scene span so it is scale invariant;

@@ -36,7 +36,7 @@ Corpus: `data/scene.json`, 700 interpenetrating triangles, 96×96, 21129 fragmen
 | --- | --- | --- | --- | --- |
 | exact (reference) | per-pixel nearest-first over-compositing | — | — | — |
 | **oracle** (`baseline/oracle.mjs`) | world-space ray cast, plane-equation Z | **0** | **0** | 0 / 9216 |
-| **painter** (baseline) | one global centroid sort | **0.249195** | 1.240e-2 | 2.22 % (204) |
+| **painter** (baseline) | one global centroid sort | **0.249195** | 1.240e-2 | 2.22 % (205) |
 | **wboit** | weighted-blended OIT, depth normalized | **0.397833** | 4.229e-2 | 19.03 % (1754) |
 
 Witnesses and structural numbers:
@@ -49,7 +49,8 @@ Witnesses and structural numbers:
 - scale invariance: geometry + camera scaled 1e-6 / 1e-3 / 1 / 1e3 / 1e6 give the **same exact-image
   hash** and max relative deviation **1.64e-16** in every error metric.
 
-Timing (ms; warmup 1, 7 reps, cold start reported separately):
+Timing (ms; warmup 1, 7 reps for every rule stage and 5 reps for the ray-cast oracle, cold start
+reported separately):
 
 | stage | min | median | p95 | relSD |
 | --- | --- | --- | --- | --- |
@@ -121,3 +122,12 @@ Both implementations agreed with each other and were both wrong (0.25 max channe
 closed form) — a textbook case of an oracle that is immune to the very dimension it claims to check.
 Sorting near-to-far fixed both; after the fix the closed form, the rasterizer and the ray caster all
 agree to 0.0, and the oracle/rasterizer identity is `maxDiff = 0` over all 21129 fragments.
+
+A separate read-only third-party verifier re-cloned this repository, re-ran `verify.mjs` and
+`bench.mjs` twice, re-derived both closed forms from first principles, and audited the oracle's
+independence. It confirmed every certificate number bit-identically and found **one real
+documentation error**: the painter visible-pixel count was written as 204 while `bench/result.json`
+records 205 (`0.022243923611111112 × 9216 = 205` exactly). The README now reads 205; `result.json`
+was not touched. It also confirmed that `baseline/oracle.mjs` uses the plane equation for Z and
+shares no named constant with `src/core.mjs` (independence is in the Z/coverage math and the skip
+rule, not in the pixel-centre sampling convention, which is necessarily the same).
